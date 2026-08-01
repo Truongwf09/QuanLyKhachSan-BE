@@ -12,7 +12,11 @@ const transporter = nodemailer.createTransport({
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
   },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
 });
+
 exports.sendOTPEmail = async (email, otp) => {
   await transporter.sendMail({
     from: process.env.MAIL_USER,
