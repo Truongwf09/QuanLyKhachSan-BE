@@ -71,7 +71,7 @@ exports.getSummary = async (MaLoai) => {
 
         FROM LOAIPHONG lp
 
-        LEFT JOIN DANHGIA dg
+        LEFT JOIN danhgia dg
             ON lp.MaLoai = dg.MaLoai
             AND dg.TrangThai = 1
 
@@ -206,7 +206,7 @@ exports.hasReviewed = async (MaKH, MaDP) => {
   const [rows] = await db.query(
     `
         SELECT MaDG
-        FROM DANHGIA
+        FROM danhgia
         WHERE MaKH = ?
         AND MaDP = ?
         LIMIT 1
@@ -234,7 +234,7 @@ exports.getAllReviews = async (filters = {}) => {
             lp.MaLoai,
             lp.TenLoai
 
-        FROM DANHGIA dg
+        FROM danhgia dg
 
         JOIN KHACHHANG kh
             ON dg.MaKH = kh.MaKH
@@ -279,7 +279,7 @@ exports.getDetail = async (MaDG) => {
 
             lp.TenLoai
 
-        FROM DANHGIA dg
+        FROM danhgia dg
 
         JOIN KHACHHANG kh
             ON dg.MaKH = kh.MaKH
@@ -297,7 +297,7 @@ exports.getDetail = async (MaDG) => {
 exports.hideReview = async (MaDG) => {
   await db.query(
     `
-        UPDATE DANHGIA
+        UPDATE danhgia
         SET TrangThai = 0
         WHERE MaDG = ?
     `,
@@ -322,7 +322,7 @@ exports.getStatistic = async () => {
             SUM(CASE WHEN SoSao = 2 THEN 1 ELSE 0 END) AS Sao2,
             SUM(CASE WHEN SoSao = 1 THEN 1 ELSE 0 END) AS Sao1
 
-        FROM DANHGIA
+        FROM danhgia
     `);
 
   return {
