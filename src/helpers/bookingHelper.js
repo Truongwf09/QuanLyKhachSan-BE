@@ -129,7 +129,7 @@ function calculateRoomPrice(roomType, finalLoaiDat, soDem, SoGio) {
 }
 
 function generateCodes() {
-  const timePart = Date.now().toString().slice(-6);
+  const timePart = Date.now().toString().slice(-4);
 
   const rand = Math.floor(100 + Math.random() * 900);
 

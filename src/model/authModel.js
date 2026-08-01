@@ -3,7 +3,7 @@ const db = require("../config/db");
 exports.findQTVByEmail = (email) => {
     return db.query(
         `SELECT q.*, c.TenCV 
-     FROM QUANTRIVIEN q
+     FROM quantrivien q
      JOIN CHUCVU c ON q.MaCV = c.MaCV
      WHERE q.Email = ?`,
         [email]
@@ -12,7 +12,7 @@ exports.findQTVByEmail = (email) => {
 
 exports.findKHByEmail = (email) => {
     return db.query(
-        `SELECT * FROM KHACHHANG WHERE Email = ?`,
+        `SELECT * FROM khachhang WHERE Email = ?`,
         [email]
     );
 };
