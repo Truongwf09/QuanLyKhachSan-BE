@@ -9,7 +9,7 @@ exports.getPublic = async (MaCN, MaLoai) => {
     let sql = `
         SELECT DISTINCT lp.*
 FROM loaiphong lp
-INNER JOIN CHINHANH_loaiphong clp
+INNER JOIN chinhanh_loaiphong clp
 ON lp.MaLoai=clp.MaLoai
 WHERE lp.TrangThai = 1
     `;

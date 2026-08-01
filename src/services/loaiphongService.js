@@ -147,7 +147,7 @@ VALUES(?,?,?,?,?,1)
   for (const maCN of danhSachCN) {
     await db.query(
       `
-        INSERT INTO CHINHANH_loaiphong(
+        INSERT INTO chinhanh_loaiphong(
             MaCN,
             MaLoai
         )
@@ -184,7 +184,7 @@ exports.update = async (user, id, data) => {
     const [[exist]] = await db.query(
       `
         SELECT *
-        FROM CHINHANH_loaiphong
+        FROM chinhanh_loaiphong
         WHERE MaLoai = ?
         AND MaCN = ?
         `,
@@ -229,7 +229,7 @@ exports.update = async (user, id, data) => {
   if (role === "admin" && data.MaCNList) {
     await db.query(
       `
-        DELETE FROM CHINHANH_loaiphong
+        DELETE FROM chinhanh_loaiphong
         WHERE MaLoai = ?
         `,
       [id],
@@ -238,7 +238,7 @@ exports.update = async (user, id, data) => {
     for (const maCN of data.MaCNList) {
       await db.query(
         `
-            INSERT INTO CHINHANH_loaiphong (
+            INSERT INTO chinhanh_loaiphong (
                 MaCN,
                 MaLoai
             )
@@ -336,7 +336,7 @@ exports.hide = async (user, id) => {
   const [rows] = await db.query(
     `
     SELECT MaCN
-    FROM CHINHANH_loaiphong
+    FROM chinhanh_loaiphong
     WHERE MaLoai = ?
     `,
     [id],
@@ -378,7 +378,7 @@ exports.show = async (user, id) => {
   const [rows] = await db.query(
     `
     SELECT MaCN
-    FROM CHINHANH_loaiphong
+    FROM chinhanh_loaiphong
     WHERE MaLoai = ?
     `,
     [id],
