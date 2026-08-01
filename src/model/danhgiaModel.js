@@ -41,8 +41,8 @@ exports.getByLoaiPhong = async (MaLoai) => {
             dg.NoiDung,
             dg.NgayDG,
             kh.HoTenKH
-        FROM DANHGIA dg
-        LEFT JOIN KHACHHANG kh
+        FROM danhgia dg
+        LEFT JOIN khachhang kh
             ON kh.MaKH = dg.MaKH
         WHERE dg.MaLoai = ?
         AND dg.TrangThai = 1
@@ -350,7 +350,7 @@ exports.toggleReview = async (MaDG) => {
   const [[review]] = await db.query(
     `
         SELECT TrangThai
-        FROM DANHGIA
+        FROM danhgia
         WHERE MaDG = ?
         `,
     [MaDG],
@@ -364,7 +364,7 @@ exports.toggleReview = async (MaDG) => {
 
   await db.query(
     `
-        UPDATE DANHGIA
+        UPDATE danhgia
         SET TrangThai = ?
         WHERE MaDG = ?
         `,
