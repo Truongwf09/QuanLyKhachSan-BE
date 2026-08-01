@@ -65,7 +65,7 @@ exports.getRoomsByType = async (
             lp.SoNguoiToiDa,
             lp.HinhAnh
 
-        FROM PHONG p
+        FROM phong p
 
         INNER JOIN loaiphong lp
             ON lp.MaLoai = p.MaLoai
@@ -98,9 +98,9 @@ exports.getRoomsByType = async (
 
                 SELECT 1
 
-                FROM PHANPHONG pp
+                FROM phanphong pp
 
-                INNER JOIN CHITIET_DP ct
+                INNER JOIN chitiet_dp ct
 
                     ON ct.MaCTDP = pp.MaCTDP
 
