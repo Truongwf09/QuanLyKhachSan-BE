@@ -1,0 +1,14 @@
+const express = require("express");
+const router = express.Router();
+const controller = require("../controller/nhanvienController");
+const { verifyToken } = require("../middleware/authMiddleware");
+const { checkPermission } = require("../middleware/permissionMiddleware");
+router.get("/profile", verifyToken, checkPermission("NHANVIEN_VIEW"), controller.getProfile);
+router.put("/reset/:id", verifyToken, checkPermission("NHANVIEN_UPDATE"), controller.resetPassword);
+router.put("/status/:id", verifyToken, checkPermission("NHANVIEN_UPDATE"), controller.toggleStatus);
+router.put("/change-password", verifyToken, controller.changePassword);
+router.get("/", verifyToken, checkPermission("NHANVIEN_VIEW"), controller.getAll);
+router.post("/", verifyToken, checkPermission("NHANVIEN_CREATE"), controller.create);
+router.put("/:id", verifyToken, checkPermission("NHANVIEN_UPDATE"), controller.update);
+router.delete("/:id", verifyToken, checkPermission("NHANVIEN_DELETE"), controller.remove);
+module.exports = router;

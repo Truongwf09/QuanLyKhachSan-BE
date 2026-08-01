@@ -1,0 +1,24 @@
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use("/api/logs", require("./routes/logRoutes"));
+app.use("/api/nhanvien", require("./routes/nhanvienRoutes"));
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/datphong", require("./routes/datphongRoutes"));
+app.use("/api/khachhang", require("./routes/khachhangRoutes"));
+app.use(require("./middleware/errorMiddleware"));
+app.use("/api/chinhanh", require("./routes/chinhanhRoutes"));
+app.use("/api/chucvu", require("./routes/chucvuRoutes"));
+app.use("/api/loaiphong", require("./routes/loaiphongRoutes"));
+app.use("/api/phong", require("./routes/phongRoutes"));
+app.use("/api/dichvu", require("./routes/dichvuRoutes"));
+app.use("/uploads", express.static("uploads"));
+app.use("/api/quyen", require("./routes/quyenRoutes"));
+app.use("/api/hoadon", require("./routes/hoadonRoutes"));
+app.use("/api/danhgia", require("./routes/danhgiaRoutes"));
+app.use("/api/cleaning", require("./routes/cleaningRoutes"));
+module.exports = app;
