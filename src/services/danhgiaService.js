@@ -7,7 +7,7 @@ exports.getAll = async () => {
 };
 
 exports.getByLoaiPhong = async (MaLoai) => {
-  return await model.getByLoaiPhong(MaLoai);
+  return await model.getByloaiphong(MaLoai);
 };
 
 exports.create = async (user, data) => {
