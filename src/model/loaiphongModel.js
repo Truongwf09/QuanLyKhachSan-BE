@@ -8,8 +8,8 @@ exports.getPublic = async (MaCN, MaLoai) => {
 
     let sql = `
         SELECT DISTINCT lp.*
-FROM LOAIPHONG lp
-INNER JOIN CHINHANH_LOAIPHONG clp
+FROM loaiphong lp
+INNER JOIN CHINHANH_loaiphong clp
 ON lp.MaLoai=clp.MaLoai
 WHERE lp.TrangThai = 1
     `;
@@ -67,7 +67,7 @@ exports.getRoomsByType = async (
 
         FROM PHONG p
 
-        INNER JOIN LOAIPHONG lp
+        INNER JOIN loaiphong lp
             ON lp.MaLoai = p.MaLoai
 
         WHERE p.MaLoai = ?
@@ -158,7 +158,7 @@ exports.hide = async (id) => {
 
     await db.query(
         `
-        UPDATE LOAIPHONG
+        UPDATE loaiphong
         SET TrangThai = 0
         WHERE MaLoai = ?
         `,
@@ -171,7 +171,7 @@ exports.show = async (id) => {
 
     await db.query(
         `
-        UPDATE LOAIPHONG
+        UPDATE loaiphong
         SET TrangThai = 1
         WHERE MaLoai = ?
         `,

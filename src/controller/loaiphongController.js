@@ -9,7 +9,7 @@ exports.getAll = async (req, res) => {
 
     res.json(data);
   } catch (err) {
-    console.error("LOAIPHONG ERROR:");
+    console.error("loaiphong ERROR:");
     console.error(err);
 
     res.status(500).json({
