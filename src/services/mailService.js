@@ -2,11 +2,16 @@ const nodemailer = require("nodemailer");
 const QRCode = require("qrcode");
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.MAIL_USER,
     pass: process.env.MAIL_PASS,
   },
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
 });
 
 exports.sendOTPEmail = async (email, otp) => {
@@ -26,7 +31,7 @@ exports.sendOTPEmail = async (email, otp) => {
 };
 
 exports.sendBookingSuccessEmail = async (email, bookingInfo) => {
-  const bookingUrl = `http://localhost:5173/khachhang/booking/${bookingInfo.MaDP}`;
+  const bookingUrl = `${process.env.FRONTEND_URL}/khachhang/booking/${bookingInfo.MaDP}`;
 
   const qrBuffer = await QRCode.toBuffer(bookingUrl, {
     width: 220,
