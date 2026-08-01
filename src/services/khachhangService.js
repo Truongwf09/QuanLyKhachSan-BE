@@ -15,8 +15,12 @@ const generateOTP = () => {
 };
 
 // REGISTER → CHỈ GỬI OTP, CHƯA INSERT DB
-exports.register = async (data) => {
+eexports.register = async (data) => {
+  console.log("STEP 1");
+
   const exist = await model.findByEmail(data.Email);
+
+  console.log("STEP 2");
 
   if (exist) {
     throw {
@@ -28,7 +32,11 @@ exports.register = async (data) => {
   const otp = generateOTP();
   const expire = Date.now() + 5 * 60 * 1000;
 
+  console.log("STEP 3");
+
   const hash = await bcrypt.hash(data.MatKhau, 10);
+
+  console.log("STEP 4");
 
   savePendingUser(data.Email, {
     ...data,
@@ -37,14 +45,16 @@ exports.register = async (data) => {
     OTPExpire: expire,
   });
 
+  console.log("STEP 5");
+
   await sendOTPEmail(data.Email, otp);
 
+  console.log("STEP 6");
+
   return {
-    message:
-      "OTP đã được gửi đến email. Vui lòng xác thực để hoàn tất đăng ký.",
+    message: "OTP đã gửi",
   };
 };
-
 // VERIFY OTP → ĐÚNG MỚI INSERT DB
 exports.verifyOTP = async (Email, OTPCode) => {
   const pendingUser = getPendingUser(Email);
