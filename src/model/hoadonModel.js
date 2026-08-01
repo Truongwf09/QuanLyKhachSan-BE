@@ -29,7 +29,7 @@ exports.getById = async (MaHD) => {
 exports.updateSoTienDaThu = async (MaHD, SoTienDaThu) => {
     await db.query(
         `
-        UPDATE HOADON
+        UPDATE hoadon
         SET SoTienDaThu = ?
         WHERE MaHD = ?
         `,

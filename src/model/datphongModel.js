@@ -484,7 +484,7 @@ exports.createCleaningJob = async (conn, MaDD, MaPhong) => {
     // Kiểm tra phòng đã có công việc dọn chưa
     const [[exists]] = await conn.query(`
         SELECT MaDD
-        FROM DONDEP
+        FROM dondep
         WHERE MaPhong = ?
           AND TrangThaiDD IN ('chờ nhận', 'đang dọn')
         LIMIT 1
@@ -496,7 +496,7 @@ exports.createCleaningJob = async (conn, MaDD, MaPhong) => {
 
     // Tạo đơn dọn phòng
     await conn.query(`
-        INSERT INTO DONDEP (
+        INSERT INTO dondep (
             MaDD,
             MaPhong,
             MaQTV,
@@ -533,7 +533,7 @@ exports.createCleaningJob = async (conn, MaDD, MaPhong) => {
         const maCheck = "CK" + Date.now().toString().slice(-6) + Math.floor(Math.random() * 1000);
 
         await conn.query(`
-            INSERT INTO CHECKLIST_DONDEP
+            INSERT INTO CHECKLIST_dondep
             (
                 MaCheck,
                 MaDD,
@@ -866,12 +866,12 @@ exports.getBookingDetailByCustomer = async (conn, MaDP, MaKH) => {
             hd.PhuongThucTT
 
         FROM PHIEUDATPHONG dp
-        LEFT JOIN CHITIET_DP ct ON ct.MaDP = dp.MaDP
-        LEFT JOIN PHANPHONG pp ON pp.MaCTDP = ct.MaCTDP
-        LEFT JOIN PHONG p ON p.MaPhong = pp.MaPhong
-        LEFT JOIN LOAIPHONG lp ON lp.MaLoai = ct.MaLoai
-        LEFT JOIN CHINHANH cn ON cn.MaCN = p.MaCN
-        LEFT JOIN HOADON hd ON hd.MaDP = dp.MaDP
+        LEFT JOIN chitiet_Dp ct ON ct.MaDP = dp.MaDP
+        LEFT JOIN phanphong pp ON pp.MaCTDP = ct.MaCTDP
+        LEFT JOIN phong p ON p.MaPhong = pp.MaPhong
+        LEFT JOIN loaiphong lp ON lp.MaLoai = ct.MaLoai
+        LEFT JOIN chinhanh cn ON cn.MaCN = p.MaCN
+        LEFT JOIN hoadon hd ON hd.MaDP = dp.MaDP
         WHERE dp.MaDP = ?
         AND dp.MaKH = ?
     `, [MaDP, MaKH]);
@@ -922,12 +922,12 @@ exports.getBookingForCheckin = async (conn, MaDP, MaCN) => {
             hd.PhuongThucTT
 
         FROM PHIEUDATPHONG dp
-        LEFT JOIN CHITIET_DP ct ON ct.MaDP = dp.MaDP
-        LEFT JOIN PHANPHONG pp ON pp.MaCTDP = ct.MaCTDP
-        LEFT JOIN PHONG p ON p.MaPhong = pp.MaPhong
-        LEFT JOIN LOAIPHONG lp ON lp.MaLoai = ct.MaLoai
-        LEFT JOIN CHINHANH cn ON cn.MaCN = p.MaCN
-        LEFT JOIN HOADON hd ON hd.MaDP = dp.MaDP
+        LEFT JOIN chitiet_dp ct ON ct.MaDP = dp.MaDP
+        LEFT JOIN phanphong pp ON pp.MaCTDP = ct.MaCTDP
+        LEFT JOIN phong p ON p.MaPhong = pp.MaPhong
+        LEFT JOIN loaiphong lp ON lp.MaLoai = ct.MaLoai
+        LEFT JOIN chinhanh cn ON cn.MaCN = p.MaCN
+        LEFT JOIN hoadon hd ON hd.MaDP = dp.MaDP
 
         WHERE dp.MaDP = ?
           AND p.MaCN = ?

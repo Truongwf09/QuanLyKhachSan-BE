@@ -1,18 +1,18 @@
 const db = require("../config/db");
 
 exports.getAll = () => {
-    return db.query("SELECT * FROM QUANTRIVIEN");
+    return db.query("SELECT * FROM quantrivien");
 };
 
 exports.getByBranch = (MaCN) => {
-    return db.query("SELECT * FROM QUANTRIVIEN WHERE MaCN = ?", [MaCN]);
+    return db.query("SELECT * FROM quantrivien WHERE MaCN = ?", [MaCN]);
 };
 
 exports.create = (data) => {
     const { MaQTV, HoTen, Email, MatKhau, MaCV, MaCN } = data;
 
     return db.query(
-        "INSERT INTO QUANTRIVIEN VALUES (?, ?, ?, ?, ?, ?)",
+        "INSERT INTO quantrivien VALUES (?, ?, ?, ?, ?, ?)",
         [MaQTV, HoTen, Email, MatKhau, MaCV, MaCN]
     );
 };
@@ -21,16 +21,16 @@ exports.update = (MaQTV, data) => {
     const { HoTen, Email, MaCV, MaCN } = data;
 
     return db.query(
-        "UPDATE QUANTRIVIEN SET HoTen=?, Email=?, MaCV=?, MaCN=? WHERE MaQTV=?",
+        "UPDATE quantrivien SET HoTen=?, Email=?, MaCV=?, MaCN=? WHERE MaQTV=?",
         [HoTen, Email, MaCV, MaCN, MaQTV]
     );
 };
 
 exports.remove = (MaQTV) => {
-    return db.query("DELETE FROM QUANTRIVIEN WHERE MaQTV=?", [MaQTV]);
+    return db.query("DELETE FROM quantrivien WHERE MaQTV=?", [MaQTV]);
 };
 exports.changeStatus = (MaQTV, TrangThai) => {
-    return db.query("UPDATE QUANTRIVIEN SET TrangThai=? WHERE MaQTV=?", [TrangThai, MaQTV]);
+    return db.query("UPDATE quantrivien SET TrangThai=? WHERE MaQTV=?", [TrangThai, MaQTV]);
 }
 exports.getProfile = async (MaQTV) => {
 
