@@ -32,7 +32,7 @@ exports.getAll = async () => {
 
 /* Đánh giá theo loại phòng */
 
-exports.getByLoaiPhong = async (MaLoai) => {
+exports.getByloaiphong = async (MaLoai) => {
   const [rows] = await db.query(
     `
         SELECT
@@ -69,7 +69,7 @@ exports.getSummary = async (MaLoai) => {
 
             lp.TenLoai
 
-        FROM LOAIPHONG lp
+        FROM loaiphong lp
 
         LEFT JOIN danhgia dg
             ON lp.MaLoai = dg.MaLoai
@@ -242,7 +242,7 @@ exports.getAllReviews = async (filters = {}) => {
         JOIN PHIEUDATPHONG dp
             ON dg.MaDP = dp.MaDP
 
-        LEFT JOIN LOAIPHONG lp
+        LEFT JOIN loaiphong lp
             ON dg.MaLoai = lp.MaLoai
 
         WHERE 1 = 1
@@ -281,10 +281,10 @@ exports.getDetail = async (MaDG) => {
 
         FROM danhgia dg
 
-        JOIN KHACHHANG kh
+        JOIN khachhang kh
             ON dg.MaKH = kh.MaKH
 
-        LEFT JOIN LOAIPHONG lp
+        LEFT JOIN loaiphong lp
             ON dg.MaLoai = lp.MaLoai
 
         WHERE dg.MaDG = ?
