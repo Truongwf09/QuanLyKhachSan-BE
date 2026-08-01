@@ -15,7 +15,7 @@ const generateOTP = () => {
 };
 
 // REGISTER → CHỈ GỬI OTP, CHƯA INSERT DB
-eexports.register = async (data) => {
+exports.register = async (data) => {
   console.log("STEP 1");
 
   const exist = await model.findByEmail(data.Email);
